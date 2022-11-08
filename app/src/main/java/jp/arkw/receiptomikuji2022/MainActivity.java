@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static int FoundSunmiPrinter = 0x00000002;
     public static int LostSunmiPrinter = 0x00000003;
     public int sunmiPrinter = CheckSunmiPrinter;
+    public int id = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,10 @@ public class MainActivity extends AppCompatActivity {
             Bitmap fortune = BitmapFactory.decodeResource(getResources(), omikuji.getFortune());
             printImage(header);
             printImage(fortune);
+            printText(omikuji.getDate());
+            printText("No. " + String.format("%04d", id));
             feedPaper(5);
+            id++;
         });
     }
 
