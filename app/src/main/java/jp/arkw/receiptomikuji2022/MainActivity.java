@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.view.View;
 
 import com.sunmi.peripheral.printer.InnerPrinterCallback;
 import com.sunmi.peripheral.printer.InnerPrinterException;
@@ -31,12 +30,15 @@ public class MainActivity extends AppCompatActivity {
         initSunmiPrinterService(this);
 
         // Resources
-        String text = "レシートおみくじ2022";
+        Bitmap header = BitmapFactory.decodeResource(getResources(), R.drawable.header);
 
         // Print Button
         findViewById(R.id.button_print).setOnClickListener(v -> {
-            printText(text);
-            feedPaper();
+            Omikuji omikuji = new Omikuji();
+            Bitmap fortune = BitmapFactory.decodeResource(getResources(), omikuji.getFortune());
+            printImage(header);
+            printImage(fortune);
+            feedPaper(5);
         });
     }
 
@@ -88,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private void feedPaper() {
+    private void feedPaper(int n) {
         try {
-            sunmiPrinterService.lineWrap(5, new InnerResultCallback() {
+            sunmiPrinterService.lineWrap(n, new InnerResultCallback() {
                 @Override
                 public void onRunResult(boolean isSuccess) throws RemoteException {
                 }
