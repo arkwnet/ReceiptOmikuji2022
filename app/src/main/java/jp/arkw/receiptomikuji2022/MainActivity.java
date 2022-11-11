@@ -39,7 +39,12 @@ public class MainActivity extends AppCompatActivity {
             Bitmap fortune = BitmapFactory.decodeResource(getResources(), omikuji.getFortune());
             printImage(header);
             printImage(fortune);
-            printText(omikuji.getDate());
+            printText("●学業　" + omikuji.getMessageStudy() + "\n");
+            printText("●待人　" + omikuji.getMessageWait() + "\n");
+            printText("●失物　" + omikuji.getMessageLost() + "\n");
+            printText("●病気　" + omikuji.getMessageDisease() + "\n");
+            printText("●方角　" + omikuji.getMessageDirection() + "\n\n");
+            printText(omikuji.getDate() + "\n");
             printText("No. " + String.format("%04d", id));
             feedPaper(5);
             id++;
